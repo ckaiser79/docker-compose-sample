@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  appserver-1:
+    build: ./appserver
+    ports:
+      - "5001:8080"
+      - "6001:9990"
+  appserver-2:
+    image: local/wildfly-configured
+    ports:
+      - "5002:8080"
+      - "6002:9990"
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
+    external: true
